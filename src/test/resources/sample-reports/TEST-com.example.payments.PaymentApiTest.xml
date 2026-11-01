@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.payments.PaymentApiTest" tests="5" failures="3" errors="1" skipped="0" time="12.4">
+  <testcase name="createsPayment" classname="com.example.payments.PaymentApiTest" time="0.8"/>
+  <testcase name="refundsPartialAmount" classname="com.example.payments.PaymentApiTest" time="1.1">
+    <failure message="1 expectation failed.&#10;Expected status code &lt;201&gt; but was &lt;500&gt;." type="java.lang.AssertionError">java.lang.AssertionError: 1 expectation failed.
+Expected status code &lt;201&gt; but was &lt;500&gt;.
+	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:89)
+	at com.example.payments.PaymentApiTest.refundsPartialAmount(PaymentApiTest.java:64)
+Response body: {"error":{"code":"INTERNAL_ERROR","message":"NullPointerException in RefundService.calculateRemaining"}}</failure>
+  </testcase>
+  <testcase name="refundsFullAmount" classname="com.example.payments.PaymentApiTest" time="1.0">
+    <failure message="1 expectation failed.&#10;Expected status code &lt;201&gt; but was &lt;500&gt;." type="java.lang.AssertionError">java.lang.AssertionError: 1 expectation failed.
+Expected status code &lt;201&gt; but was &lt;500&gt;.
+	at io.restassured.internal.ValidatableResponseImpl.statusCode(ValidatableResponseImpl.groovy:89)
+	at com.example.payments.PaymentApiTest.refundsFullAmount(PaymentApiTest.java:81)
+Response body: {"error":{"code":"INTERNAL_ERROR","message":"NullPointerException in RefundService.calculateRemaining"}}</failure>
+  </testcase>
+  <testcase name="fetchesCustomerPayments" classname="com.example.payments.PaymentApiTest" time="0.4">
+    <failure message="Expected status code &lt;200&gt; but was &lt;404&gt;. Customer cust_8a7f21 not found" type="java.lang.AssertionError">java.lang.AssertionError: Expected status code &lt;200&gt; but was &lt;404&gt;. Customer cust_8a7f21 not found
+	at com.example.payments.PaymentApiTest.fetchesCustomerPayments(PaymentApiTest.java:102)</failure>
+  </testcase>
+  <testcase name="appliesCashbackOffer" classname="com.example.payments.PaymentApiTest" time="10.0">
+    <error message="Connect to offers-service.staging.internal:8443 failed: connect timed out" type="org.apache.http.conn.ConnectTimeoutException">org.apache.http.conn.ConnectTimeoutException: Connect to offers-service.staging.internal:8443 failed: connect timed out
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:151)
+	at com.example.payments.PaymentApiTest.appliesCashbackOffer(PaymentApiTest.java:120)</error>
+  </testcase>
+</testsuite>

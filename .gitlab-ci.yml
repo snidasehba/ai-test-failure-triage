@@ -1,0 +1,36 @@
+# Unit tests on every push. The triage job runs the tool on the sample reports and publishes the
+# Markdown report; it uses Claude when ANTHROPIC_API_KEY is set as a masked CI/CD variable,
+# otherwise the rule-based classifier.
+stages:
+  - test
+  - triage
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+cache:
+  key: maven
+  paths:
+    - .m2/repository
+
+unit-tests:
+  stage: test
+  image: maven:3.9-eclipse-temurin-17
+  script:
+    - mvn -B package
+  artifacts:
+    when: always
+    paths:
+      - target/ai-test-failure-triage.jar
+    reports:
+      junit: target/surefire-reports/TEST-*.xml
+
+triage-sample-run:
+  stage: triage
+  image: eclipse-temurin:17-jre
+  needs: [unit-tests]
+  script:
+    - java -jar target/ai-test-failure-triage.jar src/test/resources/sample-reports
+  artifacts:
+    paths:
+      - triage-report.md
