@@ -17,7 +17,7 @@ public class LiveClassifierTest {
 
     @Test(groups = "llm")
     public void claudeAgreesWithTheExpectedLabels() throws Exception {
-        if (System.getenv("ANTHROPIC_API_KEY") == null) {
+        if (System.getenv().getOrDefault("ANTHROPIC_API_KEY", "").isBlank()) {
             throw new SkipException("ANTHROPIC_API_KEY not set");
         }
         List<FailureGroup> groups = FailureGrouper.group(SurefireParser.parseDirectory(Path.of("src/test/resources/sample-reports")));

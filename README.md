@@ -5,7 +5,7 @@ which are flaky tests, broken environments or bad test data. This tool reads the
 reports**, groups failures that share a cause, classifies each group with the **Claude API**, checks
 the AI's answer against the actual stack traces, and writes a **Markdown triage report**.
 
-Built with **Java 17**, the **Anthropic Java SDK** (structured output), **TestNG** and **GitLab CI**.
+Built with **Java 17**, the **Anthropic Java SDK** (structured output), **TestNG** and **GitHub Actions** (a GitLab CI file is included too).
 
 ## How it works
 

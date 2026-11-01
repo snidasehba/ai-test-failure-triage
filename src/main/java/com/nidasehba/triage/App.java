@@ -22,7 +22,7 @@ public final class App {
             System.err.println("Usage: java -jar ai-test-failure-triage.jar <reports-dir> [--heuristic]");
             System.exit(1);
         }
-        boolean useClaude = System.getenv("ANTHROPIC_API_KEY") != null && !List.of(args).contains("--heuristic");
+        boolean useClaude = !System.getenv().getOrDefault("ANTHROPIC_API_KEY", "").isBlank() && !List.of(args).contains("--heuristic");
         Classifier classifier = useClaude ? ClaudeClassifier.fromEnv() : new HeuristicClassifier();
         String report = run(Path.of(args[0]), classifier, useClaude ? "Claude" : "rule-based");
         Files.writeString(Path.of("triage-report.md"), report);
